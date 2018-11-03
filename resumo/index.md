@@ -1,3 +1,4 @@
+<title>Resumo ADS4</title>
 ## Semana 01
 
 * **TAD** → Tipo Abstrato de Dados
@@ -50,15 +51,27 @@ public static int Fibo( int n){
 
 
 
+---
+
+
+
 ## Semana 02
 
 *Sem aula*
 
 
 
+---
+
+
+
 ## Semana 03
 
 *Sem aula*
+
+
+
+---
 
 
 
@@ -155,6 +168,10 @@ private void fecharActionPerformed(ActionEvent evt) {
 
 
 
+---
+
+
+
 ## Semana 05
 
 ### API Collections
@@ -239,6 +256,10 @@ public static void main(String[] args){
 
 
 
+---
+
+
+
 ## Semana 06
 
 #### AbstractTableModel
@@ -251,6 +272,7 @@ public static void main(String[] args){
   * public String getColumnName(int coluna);
 
 
+→ Implementação Negócio:
 
 ```java
 public class ModeloUsuario extends AbstractTableModel {
@@ -297,6 +319,38 @@ public class ModeloUsuario extends AbstractTableModel {
 
 
 
+→ Implementação SWING:
+
+```java
+public class MainWindow extends javax.swing.JFrame {
+    
+  public void adicionar(Usuario u) {
+    usuarios.add(u);
+    fireTableRowsInserted(usuarios.size()-1, usuarios.size()-1);
+  }
+  
+  public void remover(int linha) {
+    usuarios.remove(linha);
+    fireTableRowsInserted(usuarios.size()-1, usuarios.size()-1);
+  }
+    
+  private void tabelaUsuariosMouseClicked(MouseEvent evt) {
+    Usuario u = tabela.getUsuario(tabelaUsuario.getSelectedRow());
+    nome.setText(u.getNome());
+    senha.setText(u.getSenha()));
+  }
+      
+  public static void main(String args[]){
+        ...
+  }
+    
+}
+```
+
+
+
+
+
 #### Conectar JDBC
 
 ```java
@@ -329,6 +383,8 @@ public class DAO {
 }
 ```
 
+
+
 &rarr; Carregando informações do banco de dados:
 
 ```java
@@ -355,6 +411,10 @@ public class DAO {
         return usuarios;
     }
 ```
+
+
+
+---
 
 
 
@@ -578,6 +638,10 @@ Do menos complexo para o mais complexo na notação Big O:
 
 
 
+---
+
+
+
 ## Semana 8
 
 #### Bubble Sort
@@ -720,44 +784,49 @@ private int dividir(int[] dados, int inicio, int fim) {
 
 
 
+---
+
+
+
 ## Semana 09
 
 #### Sistema Gerenciador de Banco de Dados - SGBD
 
 * Incorpora as funções de:
-  * Definição (Estrutura, forma como dados estão estruturados)
-  * Recuperação (leitura do dado que está armazenado) e alteração de dados
+  * **Definição** (Estrutura, forma como dados estão estruturados)
+  * **Recuperação** (leitura do dado que está armazenado) e alteração de dados
     * Acesso
     * Segurança
     * Rede
     * Espaço Físico
+  * **Alteração**
 * Facilita desenvolv. de aplic. BD:
   * Manutenção mais simples
   * Produtividade aumentada
 
 ##### Níveis de abstração
 
-* Modelo Conceitual 
+* Modelo Conceitual (maior abstração)
   * Nada técnico
   * Linguagem humana
 * Modelo Lógico
   * Mais técnico
   * Linguagem proxima máquina
-* Modelo Físico
+* Modelo Físico (menor abstração)
   * Totalmente técnico
   * Linguagem de máquina
 
 
 
-##### Linguagem para Banco de Dados Relaciona
+##### Linguagem para Banco de Dados Relacional
 
 3 grupos:
 
-* DDL, Data Descritopn Language
-  * Comandos para construir Estrutura
-* DML, Data Manipulation Language
+* **DDL**, Data Description Language
+  * Comandos para construir/alterar estrutura
+* **DML**, Data Manipulation Language
   * Manipulação de dados (alterar, incluir, eliminar informações)
-* DCL, Data Control Language
+* **DCL**, Data Control Language
   * Controle (usuários, acessos, segurança)
 
 
@@ -801,7 +870,7 @@ CREATE TABLE DEPARTAMENTO (
 	NOME_DEPTO VARCHAR2(20)
 );
 
-// Alterar tabela, no caso adicionar chave primária:
+-- Alterar tabela, no caso adicionar chave primária:
 ALTER TABLE DEPARTAMENTO
 ADD CONSTRAINT PK_CODIGO PRIMARY KEY (C0DIGO)
 
@@ -815,10 +884,10 @@ CREATE TABLE EMPREGADOS (
 	CONSTRAINT FK_DEPTO FOREIGN KEY(COD_DEPTO) REFERENCES DEPARTAMENTO(CODIGO)
 );
 
-// Constraint: restrição de integridade
+-- Constraint: restrição de integridade
 
 CREATE TABLE PRODUTO (
-	CODIGO NUMBERT(5) PRIMARY KEY,
+	CODIGO NUMBER(5) PRIMARY KEY,
 	DESCRICAO VARCHAR2(20) NOT NULL,
 	PRECO NUMBER(10,2),
 	CONSTRAINT VERIFICA_PRECO CHECK (PRECO>0) // Verifica essa condição
@@ -827,9 +896,17 @@ CREATE TABLE PRODUTO (
 
 
 
+---
+
+
+
 ## Semana 10
 
-##### Select
+#### DML
+
+→ Leitura e manipulação de informações armazenadas no Banco de Dados
+
+##### SELECT
 
 Recuperar informações armazenadas;
 
@@ -837,18 +914,18 @@ Recuperar informações armazenadas;
 SELECT COLUNA1, COLUNA2, COLUNA3
 FROM TABELA1
 
-SELECT NOME, (SALARIO*12) // Manipula os dados apresentados da coluna salario
+SELECT NOME, (SALARIO*12) -- Manipula os dados apresentados da coluna salario:
 FROM EMPREGADOS 
 
-SELECT NOME, (SALARIO*12) AS SALARIO ANUAL // Apelida segunda coluna
+SELECT NOME, (SALARIO*12) AS SALARIO ANUAL -- Apelida segunda coluna
 FROM EMPREGADOS
 
-SELECT DISTINCT COD_DEPTO // Mostra apenas valores distintos, suprimindo repetições
+SELECT DISTINCT COD_DEPTO -- Mostra apenas valores distintos, suprimindo repetições
 FROM EMPREGADOS
 
 SELECT *
 FROM EMPREGADOS
-WHERE SALARIO > 9000; // filtra salario maior que 9000
+WHERE SALARIO > 9000; -- filtra salario maior que 9000
 ```
 
 &rarr; Condições de comparação
@@ -858,6 +935,7 @@ WHERE SALARIO > 9000; // filtra salario maior que 9000
 * IN (item1, item2, item3 ...)
 * LIKE
 * IS NULL
+* WHERE
 
 &rarr; Condições Lógicas
 
@@ -870,11 +948,12 @@ SELECT NOME, SALARIO
 FROM EMPREGADOS
 WHERE CODCHEFE IS NOT NULL
 AND (SALARIO BETWEEN 9000 AND 12000)
-ORDER BY NOME DESC;
+ORDER BY NOME DESC; -- Ordena por nome ordem decrescente
 ```
 
 &rarr; Funções de grupo
 
+* GROUP BY
 * AVG
 * COUNT
 * MAX
@@ -888,16 +967,12 @@ SELECT COD_DEPTO,
 	MIN(SALARIO),
 	SUM(SALARIO),
 FROM EMPREGADOS
-GROUP BY COD_DEPTO; // Mostra media, maximo, minimo, soma dos salarios agrupados por depto
+GROUP BY COD_DEPTO; -- Mostra media, maximo, minimo, soma dos salarios agrupados por depto
 
 
 ```
 
 
-
-
-
-#### DML
 
 ##### INSERT
 
@@ -1018,19 +1093,33 @@ ON EMP.COD_DEPTO = DEP.CODIGO;
 
 
 
+---
+
+
+
+## Semana 11
+
+*Sem aula*
+
+
+
+---
+
+
+
 ## Semana 12
 
-* Dado &rarr; sequência de símbolos quantitativos qualificáveis, sem significado específico
+* **Dado** &rarr; sequência de símbolos quantitativos qualificáveis, sem significado específico
+* **Informação** &rarr;  resultado da organização, tratamento e interpretação de conjunto de dados estruturados
+* **Conhecimento** &rarr; capacidade de analisar/interpretar diversos conjuntos de informação
 
-* Informação &rarr;  resultado da organização, tratamento e interpretação de conjunto de dados estruturados
+|                                    |                                    |
+| ---------------------------------- | ---------------------------------- |
+| ![](files/2018-11-03-09-51-52.png) | ![](files/2018-11-03-09-50-17.png) |
 
-* Conhecimentoo &rarr; capacidade de analisar/interpretar diversos conjuntos de informação
+* **Inteligência** &rarr; uso do conhecimento com competência em um processo de decisão
 
-  **Dado (análise sintática) &rarr; _operações lógicas_ &rarr; Informação (análise semânticia) &rarr; _Interpretação_ &rarr; Conhecimento (análise pragmática)**
-
-* Inteligência &rarr; uso do conhecimento com competência em um processo de decisão
-
-* Business Intelligence &rarr; utilização de variadas fontes de informação para definir estratégias de competitividade nos negócios
+* **Business Intelligence** &rarr; utilização de variadas fontes de informação para definir estratégias de competitividade nos negócios
 
 
 
@@ -1044,16 +1133,16 @@ Forma de armazenar os dados históricos com uma arquitetura própria para análi
 
 
 
-##### Data Warehouse
+##### Data Warehouse (DW)
 
-* Banco de dados orientado por assunto (e não mais a transações)
+* Banco de dados orientado por assunto
 * Consolidador de dados, muitas vezes agregados
 * Objetivo dar suporte aos processos de tomada de decisão
-* Empresta toda
+* Dados de toda a empresta
 
 
 
-##### Data Marts
+##### Data Marts (DM)
 
 * Variante do Data Warehouse
 * Voltado para área específica
@@ -1063,53 +1152,436 @@ Forma de armazenar os dados históricos com uma arquitetura própria para análi
 
 ##### ODS - Operational Data Store
 
-* segue uma estrutura de dados normalizada
-* é realizado processo de limpeza de dados
-* transição entre banco de dados e data warehouse
+* tabela que segue uma estrutura de dados normalizada
+* já realizado processo de limpeza de dados
+* transição entre banco de dados transacional e data warehouse
 
 
 
 ##### Características de DW/DM
 
-* orientado por temas - armazena informações dobre temas específicos
-* integrado - receber dados de diversas fontes. Necessário utilizar técnicas de limpeza e integração
-* variável no tempo - não atualizável, cada ocorrência uma nova entrada é criada
-* não volátil - valores não podem ser alterados após inseridos
+* **orientado por temas** - armazena informações sobre temas específicos e importantes para tomada de decisão
+* **integrado** - recebe dados de diversas fontes. Necessário utilizar técnicas de limpeza e integração
+* **variável no tempo** - não atualizável, cada ocorrência uma nova entrada é criada, a cada mudança uma nova entrada é criada
+* **não volátil** - valores não podem ser alterados após inseridos
 
 
 
 ##### Granularidade
 
 * Nível de detalhe em que as informações inseridas podem ser alcançadas (ex. diário, mensal, anual)
-* maior granularidade &rarr; maior nível de detalhe &rarr; afeta volume dados e performance
+* maior granularidade &rarr; maior nível de detalhe &rarr; maior volume dados e menor performance
 
 
 
 ##### Tipos de concepção de um DW
 
-###### Top-Down:
+A construção pode acontecer de duas formas:
 
-Data Warehouse (corporativo) &rarr; Data Marts (departamentais)
+* **Top-Down**:
+  * Data Warehouse (corporativo) &rarr; Data Marts (departamentais)
 
-###### Bottom-Up
-
-Data Marts &rarr; Data Warehouse
+* **Bottom-Up**
+  * Data Marts &rarr; Data Warehouse
 
 
 
 ##### Fases de um projeto de DW/DM
 
-✓ Planejamento
-✓ Levantamento de Necessidades
-✓ Modelagem Dimensional
-✓ Projeto Físico do Banco de Dados
-✓ Projeto de ETL (Extraction, Transformation and Loading)
-✓Desenvolvimento da Apresentação dos Dados (Relatórios/Painéis de Indicadores)
-✓ Validação e Teste
-✓Treinamento de Usuários
-✓ Implantação
+- Planejamento
+- Levantamento de Necessidades
+- Modelagem Dimensional
+- Projeto Físico do Banco de Dados
+- Projeto de ETL (Extraction, Transformation and Loading)
+- Desenvolvimento da Apresentação dos Dados (Relatórios/Painéis de Indicadores)
+- Validação e Teste
+- Treinamento de Usuários
+- Implantação
 
 
 
-### Modelagem Dimensional
+#### Modelagem Dimensional
 
+Estrutura de Modelagem de Banco de Dados própria para Business Intelligence
+
+* Formato estruturado leve/limpo
+* Intuito/simples entendimento
+* Alto desempenho
+
+
+
+<u>Dois tipos de tabela:</u>
+
+* Tabela **FATOS**
+  * Assuntos a serem analisados (ex. vendas, compras, estoque, etc)
+  * Principais informações devem ser numéricas (recuperação mais rápida)
+  * Armazena milhares e até milhões de registros
+* Tabela **DIMENSÕES**
+  * Descrições textuais do negócio
+  * Atributos do tipo texto e data  (ex. produto, marca, categoria)
+  * Obrigatoriamente sempre deve existir uma tabela TEMPO
+
+
+
+<u>Três tipos de modelagem dimensional:</u>
+
+* Esquema **ESTRELA**
+  * Mais simples
+  * Única tabela principal (fatos)
+* Esquema **FLOCO DE NEVE (Snowflake)**
+  * Extensão do esquema Estrela
+  * Pontas tornam-se centro de outras estrelas
+  * Normalização das tabelas
+* Esquema **CONSTELAÇÃO**
+  * Múltiplas estrelas relacionadas entre si
+  * Diversas tabelas Fatos que compartilham tabelas dimensão
+  * Diversos assuntos em um mesmo contexto
+
+
+
+
+
+#### Slowly Changing Dimension (SCD)
+
+Forma de registrar alterações de um dado ao longo do tempo, garantindo consistência dos dados.
+
+* **SCD - Type 0**
+  * Nenhum histórico é armazenado
+  * Dados antigos são apagados e dados novos são inseridos
+* **SCD - Type 1**
+  * Nenhum histórico é armazenado
+  * É verificado se o registro já existe, caso positivo, os valores são atualizados (sobrescritos)
+* **SCD - Type 2**
+  * Manutenção de histórico através de um novo atributo como número de versão, data de início/fim, etc
+* **SCD - Type 3**
+  * Manutenção de histórico de um atributo apenas utilizando coluna atual/anterior
+* **SCD - Type 4**
+  * Utiliza-se tabela Histórico
+  * Mesma estrutura da tabela base, com acrescimo de um atributo que registre a data de alteração
+* **SCD - Type 6**
+  * Combinação dos tipos 1+2+3
+
+
+
+#### ETL (Extract, Transform, Load)
+
+Técnica para extrair, transformar, limpar os dados, e então carregar ou atualizar no banco de dados
+
+* **Extrair**
+  * Origens como Bancos de Dados, Sistemas Transacionais, Planilhas, Arquivos de Texto, etc
+* **Transformar**
+  * Limpar, enriquecer, aplicar regras de negócio
+  * Descartar dados inconsistentes, irrelevantes, ultrapassados, errados, incompletos
+  * Solucionar diferenças de precisão, códigos e expressões, granularidade, abstração
+* **Carregar (Load)**
+  * Efetua a carga no banco de dados
+
+
+
+#### OLTP (On-Line Transactional Processing)
+
+Sistemas que se encarregam de registrar todas as transações contidas em uma determinada operação organizacional.
+
+- Sistema de Transações Bancárias
+- Sistema de Folha de Pagamento
+- Sistemas ERP (Enterprise Resource Planning)
+
+
+
+#### OLAP (On-Line Analytical Processing)
+
+- Método de acessar, visualizar, e analisar dados corporativos com alta flexibilidade e performance
+- Capaz de manipular e analisar um grande volume de dados sob múltiplas perspectivas.
+- Apresenta informações para usuários via um modelo de dados natural e intuitivo
+
+
+
+###### Variações de OLAP
+
+* **ROLAP** (Relational On-Line Analytical Processing)
+  * Utiliza Banco de Dados Relacionais
+  * Modelo de dados Entidade-Relacionamento ao invés de Modelagem Dimensional
+* **MOLAP** (Multidimensional On-Line Analytical)
+  * Requisita dados de um Banco de Dados Multidimensional
+  * Dados recebidos são manipulados diretamente, ganhando desempenho e evitando tráfego de dados na rede
+* **HOLAP** (Hybrid On-Line Analytical Processing)
+  * Combinação de ROLAP com MOLAP
+* **DOLAP** (Desktop On-Line Analytical Processing)
+  * Ferramentas Desktop que requerem os dados diretamente a um servidor, que retorna um macro-cubo para ser analisado pelo usuário
+  * Todo o trabalho de análise fica a cargo da máquina
+* **WOLAP** (Web On-Line Analytical Processing)
+  * Semelhante ao DOLAP, mas utilizando um navegador de internet e tecnologias como HTML5 e JavaScript
+
+
+
+#### CRM (Customer Relationship Management)
+
+* Gestão de Relacionamento com o Cliente
+* Automatiza e Armazena todas as atividades e interações
+* Cliente como centro do negócio
+
+
+
+---
+
+
+
+## Semana 13
+
+#### Big Data
+
+Capacidade de processar e armazenar grandes quantidades de dados (estruturados e não estruturados), aliado com algoritmos que garantes alta velocidade de processamento. Baseado em 5 Vs:
+
+* Volume
+* Variedade
+* Velocidade
+* Veracidade
+* Valor
+
+
+
+#### Hadoop
+
+- Framework Java de computação distribuída
+- Distribui dados em clusters e processa grande volume de dados
+
+
+
+#### HDFS (Hadoop Distributed File System)
+
+- Módulo de sistema de arquivos do Hadoop
+- Responsável por gerenciar a distribuição de arquivos entre os nós (clusters)
+- Utitliza MapReduce para mapear os dados
+
+
+
+#### MapReduce
+
+- Processa grande volume de dados em paralelo
+- Divide seu trabalho em um conjunto de tarefas independentes
+
+
+
+#### Banco de Dados Não-Estruturados / NoSQL
+
+* Banco de dados não relacional e de alta performance
+* Não utiliza o conceito de Schema dos bancos de dados relacionais
+
+
+
+* Benefícios
+
+  * Flexibilidade
+  * Escalabilidade
+  * Disponibilidade
+  * Open Source
+  * Baixo custo operacional
+  * Funcionalidades especiais
+
+* São subdivididos em quatro tipos:
+
+  * **Orientados a colunas**
+    * Estrutura similar a tabela
+    * Armazenamento em colunas
+    * Colunas podem ter sub-colunas e estas múltiplas propriedades
+    * ex. Cassandra, HBase, Azure Cosmos DB
+  * **Orientados a Chave-Valor**
+    * Armazena conjunto de arrays ou estrutura de dados, conhecido como Dictionary ou Hash
+    * Cada Dictionary contém múltiplos atributos
+    * Cada registro possui uma chave única (key)
+    * ex. Redis, Memchached, Amazon DynamoDB, Oracle NoSQL
+  * **Orientados a Grafos**
+    * Cada registro armazenado é automaticamente inter-relacionado, facilitando busca
+    * Permite através de consultas simples, recuperar dados hierárquicos complexos, que seriam muito custosos em um banco de dados relacional comum
+    * **Vértices** (~tabelas), **Arestas** (~relacionamento entre os vértices), **Propriedades** (~atributos)
+    * ex. Neo4j, OrientDB, Titan, ArangoDB
+  * **Orientado a Documentos**
+    * Utiliza estrutura do tipo JSON, baseado em JavaScript, para representar dados
+    * Permite armazenar estrutura (Collection) flexível  com qualquer quantidade de atributos, tamanhos e tipos de dados
+    * ex. MongoDB, Couchbase, Amazon DynamoDB
+
+
+
+#### Cloud Computing
+
+- Serviço oferecido por uma empresa especializada no assunto, que garantem alta disponibilidade, suporte especializado 24x7.
+- Oferecem um custo consideravelmente mais baixo, pois compartilha um grande servidor com vários clientes
+
+
+
+##### Cloud Databases
+
+* São banco de dados (estruturados e não estruturados) que não são mantidos pela infraestrutura interna da empresa → DBaaS - Database as a Service
+* Não há despesas com licenças de software, apenas com o aluguel do serviço
+* ex. Amazon Web Services, Google Cloud, Microsoft Azure, IBM Bluemix
+
+
+
+#### Mineração de Dados
+
+- Processo de exploração de grandes quantidades de dados com o objetivo de encontrar **Anomalias, Padrões e Correlações**
+- Objetivo → suporte ao processo de tomada de decisão
+- Vantagens estratégicas → Aumentar Receitas, Reduzir Custos, Melhorar relacionamento com clientes, Reduzir Riscos, etc
+
+
+
+- **Modelagem Descritiva** → Revela semelhanças compartilhadas
+  - ex. Categorização de clientes por preferências
+- **Modelagem Prescritiva** → Observa variáveis internas, externas e restrições para recomendar uma ou mais ações
+  - ex. Oferta de marketing a ser direcionada ao cliente
+- **Modelagem Preditiva** → Análises aprofundadas para classificar eventos futuros ou estimar resultados
+  - ex. Análise de crédito de um cliente
+
+
+
+#### Ciência de Dados
+
+* Busca descobrir pontos relevantes em grande quantidade de dados → Big Data
+* Busca encontrar relevância em dados estruturados e não estruturados utilizando Computação Cognitiva
+
+![](https://i2.wp.com/datascienceacademy.com.br/blog/wp-content/uploads/2017/08/analista-bixcientista-dados.png?resize=1024%2C508)
+
+
+
+#### Computação Cognitiva
+
+→ Foco em auxiliar no processo de tomada de decisão, minimizando erros e falhas humanas
+
+* Aprendizado de Máquina
+* Raciocínio Analítico/Lógico
+* Processamento de Linguagem Natural
+* Reconhecimento de Voz e Visão
+* Análise de Contexto e Sentimentos
+* ex. IBM Watson, Amazon AI, Microsoft Cognitive Services, Google AI
+
+
+
+---
+
+
+
+## Semana 14
+
+
+
+SGBD - Arquitetura de três camadas
+
+![](files/2018-11-03-17-56-59.png)
+
+
+
+
+
+#### Banco de Dados Distribuídos
+
+* Vantagens:
+  * Melhor performance
+  * Ecomonia de infraestrutura
+  * Modularidade
+  * Maior Disponibilidade
+
+* Desvantagens
+
+  * Complexidade
+  * Maior custo
+  * Falta de mão de obra qualificada
+
+
+
+**Tipos**
+
+  * Homogêneos → iguais em todos os nós
+  * Heterogêneos → diferentes nos nós
+
+
+
+**Formas de Distribuição de Dados**
+
+* **Replicação** → Existe uma cópia de cada dado em cada nó da rede (homogêneo)
+  * Replicação Síncrona → Cada transação é concluída quando todos os nós confirmam
+  * Replicação Assíncrona → O nó principal executa a transação e então encaminha para demais nós
+* **Fragmentação** → Os dados são dividos em todo o sistema (heterogêneo)
+  * Fragmentação Vertical ou Horizontal
+
+
+
+#### Controle de Transações
+
+→ Propriedades **ACID**
+
+* **Atomicidade** →  as operações da transação devem ser realizadas na sua totalidade ou não ser realizadas de forma nenhuma
+* **Consistência** → uma transação deve levar o banco de dados de um estado consistente para outro
+* **Isolamento** → cada transação não deve ser interferida por outras transações concorrentes
+* **Durabilidade** → As mudanças devem persistir, não podem ser perdidas em caso de falha
+
+
+
+**Instruções de controle**
+
+* COMMIT → finaliza a transação atual
+* SAVEPOINT → cria um ponto de retauração dentro da transação
+* ROLLBACK → descarta as transações pendentes (todas ou até savepoint determinado)
+
+
+
+```sql
+INSERT INTO Departamento (ID_Depto, NomeDepto, ID_Gerente)
+   VALUES (11, 'RH', 2);
+SAVEPOINT ponto1;
+
+DELETE FROM Funcionario;
+ROLLBACK TO SAVEPOINT ponto1; -- Reverte ao SAVEPOINT ponto1
+
+UPDATE Funcionario
+  SET salario = salario * 1.05
+  WHERE ID_Depto = 5;
+COMMIT;
+```
+
+
+
+#### Normalização de Dados
+
+O processo de normalização deve ocorrer para que sejam eliminados anomalias de um projeto de banco de dados.
+
+* Eliminar duplicidade de dados
+* Evitar erros:
+  * Repetição de informações
+  * Perda de informações
+  * Inabilidade de representar certas informações
+* Garantir a integridade dos dados
+* Organizar e dividir tabelas da forma mais eficiente possível
+* Diminuir redundância
+* Permitir evolução do banco de dados
+
+
+
+**Anomalias**
+
+* **Inserção**:
+  * Inconsistência de informações entre registros
+  * Redundância e necessidade de atualizar vários registros quando uma informação é inserida
+* **Exclusão:**
+  * Quando a exclusão de um registro pode causarperda de alguma informação importante
+* **Atualização:**
+  * Manter a consistência dos registros, quando for necessário fazer alguma atualização de alguma informação
+
+
+
+**Dependência Funcional**
+
+→ Ocorre quando um conjunto A permite descobrir o valor de um conjunto B
+
+
+
+**Chaves**
+
+* Chave Candidata → atributos que são únicos para cada registro, ex: CPF, RG, título eleitor, Código
+* Chave Primária → é escolhida dentre as chaves candidatas com o intuito de ser o identificador do registro
+* Chave Estrangeira → atributo que faz ligação com outra entidade
+
+
+
+**Desnormalização**
+
+→ Quando temos informaçĩes misturadas dentro de uma mesma tabela
