@@ -1,3 +1,5 @@
+# Resumo ADS4
+
 ## Semana 01
 
 * **TAD** → Tipo Abstrato de Dados
@@ -274,6 +276,9 @@ public static void main(String[] args){
 → Implementação Negócio:
 
 ```java
+import javax.swing.*;
+import java.util.*;
+
 public class ModeloUsuario extends AbstractTableModel {
     
     List<Usuario> usuarios = new ArrayList<>();
@@ -321,6 +326,9 @@ public class ModeloUsuario extends AbstractTableModel {
 → Implementação SWING:
 
 ```java
+import javax.swing.*;
+import ModeloUsuario;
+
 public class MainWindow extends javax.swing.JFrame {
     
   public void adicionar(Usuario u) {
@@ -340,7 +348,10 @@ public class MainWindow extends javax.swing.JFrame {
   }
       
   public static void main(String args[]){
-        ...
+       JTable tbl_usuario = new JTable(); // Cria tabela
+      
+       ModeloUsuario modeloUsuario = new ModeloUsuario();
+       tbl_usuario.setModel(modeloUsuario); // Define o modelo da tabela
   }
     
 }
@@ -1584,3 +1595,11 @@ O processo de normalização deve ocorrer para que sejam eliminados anomalias de
 **Desnormalização**
 
 → Quando temos informaçĩes misturadas dentro de uma mesma tabela
+
+
+
+
+
+
+[![Analytics](https://ga-beacon.appspot.com/UA-3911605-1/git/gutocabral/resumo)](https://github.com/igrigorik/ga-beacon)
+
