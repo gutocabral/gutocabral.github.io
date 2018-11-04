@@ -1597,9 +1597,5 @@ O processo de normalização deve ocorrer para que sejam eliminados anomalias de
 → Quando temos informaçĩes misturadas dentro de uma mesma tabela
 
 
-
-
-
-
 [![Analytics](https://ga-beacon.appspot.com/UA-3911605-1/git/gutocabral/resumo)](https://github.com/igrigorik/ga-beacon)
 
