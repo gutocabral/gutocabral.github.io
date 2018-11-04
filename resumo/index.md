@@ -23,7 +23,7 @@
 #### Recursão
 
 * Repetição de tarefas sem uso de estruturas de repetição (for/while/do...while), chamando recursivamente o mesmo a própria função
-* Deve ter uma pase de parada
+* Deve ter uma base de parada
 * Muito utilizado em problemas de dividir e conquistar
 
 
