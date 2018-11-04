@@ -1,4 +1,16 @@
+<head>
 <title>Resumo ADS4</title>
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-3911605-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-3911605-1');
+</script>
+</head>
+
 ## Semana 01
 
 * **TAD** → Tipo Abstrato de Dados
