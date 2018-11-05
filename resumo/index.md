@@ -34,7 +34,7 @@
 ```java
 public static int fat(int n){
    if(n ==0) return 1; // base ou ponto de parada
-   return n*fat(n-1);
+   return n*fat (n-1);
 }
 ```
 
@@ -46,7 +46,7 @@ public static int fat(int n){
 public static int Fibo( int n){
    if(n== 0) return 0;
    if (n==1) return 1;
-   return Fibo (n-1) + Fibo(n-2);
+   return Fibo (n-1) + Fibo (n-2);
 }
 ```
 
@@ -213,7 +213,7 @@ Collections.sort(lista); // ordenação
 
 &rarr; Implementando em um objeto
 
-```Java
+```java
 public class Objeto implements Comparable(Objeto) {
     
     String atributo1;
@@ -343,8 +343,6 @@ public class MainWindow extends javax.swing.JFrame {
     
   private void tabelaUsuariosMouseClicked(MouseEvent evt) {
     Usuario u = tabela.getUsuario(tabelaUsuario.getSelectedRow());
-    nome.setText(u.getNome());
-    senha.setText(u.getSenha()));
   }
       
   public static void main(String args[]){
@@ -900,7 +898,7 @@ CREATE TABLE PRODUTO (
 	CODIGO NUMBER(5) PRIMARY KEY,
 	DESCRICAO VARCHAR2(20) NOT NULL,
 	PRECO NUMBER(10,2),
-	CONSTRAINT VERIFICA_PRECO CHECK (PRECO>0) // Verifica essa condição
+	CONSTRAINT VERIFICA_PRECO CHECK (PRECO>0) -- Verifica essa condição
 )
 ```
 
@@ -920,7 +918,7 @@ CREATE TABLE PRODUTO (
 
 Recuperar informações armazenadas;
 
-``` sql
+```sql
 SELECT COLUNA1, COLUNA2, COLUNA3
 FROM TABELA1
 
@@ -953,7 +951,7 @@ WHERE SALARIO > 9000; -- filtra salario maior que 9000
 * OR
 * NOT
 
-```SQL
+```sql
 SELECT NOME, SALARIO
 FROM EMPREGADOS
 WHERE CODCHEFE IS NOT NULL
@@ -970,7 +968,7 @@ ORDER BY NOME DESC; -- Ordena por nome ordem decrescente
 * MIN
 * SUM
 
-``` SQL
+```sql
 SELECT COD_DEPTO,
 	AVG(SALARIO),
 	MAX(SALARIO),
@@ -986,36 +984,36 @@ GROUP BY COD_DEPTO; -- Mostra media, maximo, minimo, soma dos salarios agrupados
 
 ##### INSERT
 
-``` SQL
+```sql
 INSERT INTO DEPARTAMENTO (CODIGO, NOME_DEPTO, LOCALIZACAO)
 VALUES (50, 'TREINAMENTO', 'SEDE');
 
 INSERT INTO DEPARTAMENTO_BACKUP (CODIGO, NOME_DEPTO, LOCALIZACAO)
-SELECT * FROM DEPARTAMENTO; // COPIA DA TABELA DEPARTAMENTO PARA DEPARTAMENTO_BACKUP
+SELECT * FROM DEPARTAMENTO; -- COPIA DA TABELA DEPARTAMENTO PARA DEPARTAMENTO_BACKUP
 ```
 
 
 
 ##### UPDATE
 
-```SQL
+```sql
 UPDATE EMPREGADOS
-SET SALARIO = SALARIO * 1.10; // Atualiza todas as linhas da tabela
+SET SALARIO = SALARIO * 1.10; -- Atualiza todas as linhas da tabela
 
 UPDATE EMPREGADOS
 SET SALARIO = SALARIO * 2
-WHERE CODIGO = 6; // Atualiza apenas a linha especificada
+WHERE CODIGO = 6; -- Atualiza apenas a linha especificada
 ```
 
 
 
 ##### DELETE
 
-```SQL
-DELETE EMPREGADOS; // Deleta tudo (!)
+```sql
+DELETE EMPREGADOS; -- Deleta tudo (!)
 
 DELETE EMPREGADOS
-WHERE CODIGO = 1; // Deleta apenas a linha selecionada
+WHERE CODIGO = 1; -- Deleta apenas a linha selecionada
 ```
 
 
@@ -1094,7 +1092,7 @@ FROM EMPREGADOS;
 
 #### JOIN
 
-```SQL
+```sql
 SELECT EMP.NOME, DEP.NOME
 FROM EMPREGADOS EMP
 INNER JOIN DEPARTAMENTO DEP
