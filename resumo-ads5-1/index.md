@@ -87,7 +87,7 @@ ____
 
 #### JSP
 
-```HTML
+```html
 <%@ page (...) >
 <%@ include (...) >
 <%@ taglib (...) >
@@ -100,5 +100,39 @@ ____
     <H1>Olá <%=nome%>! </H1>
 </BODY>
 </HTML>
+```
+
+_____
+
+#### JSF
+
+```html
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 (...)>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Título	</title>
+    </h:head>
+    <h:body>
+            <h:inputText label="nome" value="#{controllerMB.model.nome}" />
+            <h:inputSecret label="senha" value="#{controllerMB.model.password}" />
+            <h:selectBooleanCheckbox label="checkbox" value="#{controllerMB.model.opcao}" />
+            <h:commandButton value="Cadastrar" action="#{controllerMB.model.add()}" />
+            
+            <h:dataTable value="#{controllerMB.model}" var="model">
+                <h:column>
+                    <f:facet name="header">
+                        <h:outputText value="Nome" />
+                    </f:facet>
+                    <h:outputText value="#{model.nome}" />
+                </h:column>
+            </h:dataTable>
+        
+        </h:form>
+    </h:body>
+</html>
+
 ```
 
